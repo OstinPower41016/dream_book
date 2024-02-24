@@ -14,38 +14,47 @@ class HomeScreen extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        selectedFontSize: 13,
-        type: BottomNavigationBarType.fixed,
-        currentIndex: 1,
-        onTap: controller.changeTab,
-        items: [
-          BottomNavigationBarItem(
-            icon: Transform.rotate(
-              angle: -15 * (3.141592653589793 / 180),
-              child: Icon(Icons.nightlight, color: yellow),
-            ),
-            label: "Сны",
+      bottomNavigationBar: Obx(() => _bottomNavigationBar()),
+      body:
+          Obx(() => SafeArea(child: _buildContent(controller.activeTab.value))),
+    );
+  }
+
+  Widget _bottomNavigationBar() {
+    return BottomNavigationBar(
+      selectedFontSize: 13,
+      type: BottomNavigationBarType.fixed,
+      currentIndex: controller.currentTabIndex.value,
+      onTap: controller.changeTab,
+      // selectedItemColor: yellow,
+      // selectedLabelStyle: TextStyle(color: yellow, backgroundColor: yellow),
+      unselectedItemColor: Colors.white,
+      selectedItemColor: Color(0xFF3CDAF7),
+      items: [
+        BottomNavigationBarItem(
+          icon: Transform.rotate(
+            angle: -15 * (3.141592653589793 / 180),
+            child: Icon(Icons.nightlight, color: Color(0xFF3CDAF7)),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.create, color: yellow),
-            label: "Дневник",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications_active, color: yellow),
-            label: "Будильник",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.headphones, color: yellow),
-            label: "Музыка",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person, color: yellow),
-            label: "Профиль",
-          ),
-        ],
-      ),
-      body: Obx(() => SafeArea(child: _buildContent(controller.activeTab.value))),
+          label: "Сны",
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.create, color: Color(0xFF3CDAF7)),
+          label: "Дневник",
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.notifications_active, color: Color(0xFF3CDAF7)),
+          label: "Будильник",
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.headphones, color: Color(0xFF3CDAF7)),
+          label: "Музыка",
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person, color: Color(0xFF3CDAF7)),
+          label: "Профиль",
+        ),
+      ],
     );
   }
 

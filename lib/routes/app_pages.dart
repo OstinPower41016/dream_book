@@ -13,27 +13,31 @@ class AppPages {
   static const INITIAL = Routes.HOME;
 
   static final routes = {
-    GetPage(name: Routes.HOME, page: () => HomeScreen(), binding: HomeBinding(), children: [
-      GetPage(
-        name: Routes.DIARY,
-        page: () => DiaryScreen(),
-      ),
-      GetPage(
-        name: Routes.DREAMS,
-        page: () => DreamsScreen(),
-      ),
-      GetPage(
-        name: Routes.MUSIC,
-        page: () => MusicScreen(),
-      ),
-      GetPage(
-        name: Routes.PROFILE,
-        page: () => ProfileScreen(),
-      ),
-      GetPage(
-        name: Routes.ALARM_CLOCK,
-        page: () => AlarmClockScreen(),
-      ),
-    ])
+    GetPage(
+        name: Routes.HOME,
+        page: () => HomeScreen(),
+        binding: HomeBinding(),
+        children: [
+          GetPage(
+            name: Routes.DIARY,
+            page: () => DiaryScreen(),
+          ),
+          GetPage(
+            name: Routes.DREAMS,
+            page: () => DreamsScreen(),
+          ),
+          GetPage(
+            name: Routes.MUSIC,
+            page: () => MusicScreen(),
+          ),
+          GetPage(
+            name: Routes.PROFILE,
+            page: () => ProfileScreen(),
+          ),
+          GetPage(
+            name: Routes.ALARM_CLOCK,
+            page: () => AlarmClockScreen(),
+          ),
+        ])
   };
 }
