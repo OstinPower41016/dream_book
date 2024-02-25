@@ -5,15 +5,6 @@ import 'package:timezone/timezone.dart' as tz;
 class NotificationService {
   final _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
-  NotificationService._();
-
-  static NotificationService? _instance;
-
-  static NotificationService get instance {
-    _instance ??= NotificationService._();
-    return _instance!;
-  }
-
   Future<void> setup() async {
     const androidInitializationSetting =
         AndroidInitializationSettings('@mipmap/ic_launcher');
