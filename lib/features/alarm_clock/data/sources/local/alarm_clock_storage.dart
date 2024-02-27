@@ -6,11 +6,13 @@ import 'package:dream_book/features/alarm_clock/domain/entities/alarm_clock_enti
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+const ALARM_CLOCK_STORAGE_STRING = "alarm_clock";
+
 class AlarmClockStorage {
   final SharedPreferences storage = serviceLocator<SharedPreferences>();
 
   Future<List<AlarmClockEntity>> getListAlarmClocks() async {
-    final String? alarmClocksJson = storage.getString("alarm_clocks");
+    final String? alarmClocksJson = storage.getString(ALARM_CLOCK_STORAGE_STRING);
 
     if (alarmClocksJson == null) {
       return [];
@@ -24,7 +26,7 @@ class AlarmClockStorage {
   }
 
   Future<void> saveAlarmClock(AlarmClockEntity alarmClock) async {
-    final String? alarmClocksJson = storage.getString("alarm_clocks");
+    final String? alarmClocksJson = storage.getString(ALARM_CLOCK_STORAGE_STRING);
 
     List<Map<String, dynamic>> alarmClocksMap = [];
 
@@ -37,11 +39,11 @@ class AlarmClockStorage {
 
     alarmClocksMap.add(alarmClock.toJson());
 
-    await storage.setString("alarm_clocks", jsonEncode(alarmClocksMap));
+    await storage.setString(ALARM_CLOCK_STORAGE_STRING, jsonEncode(alarmClocksMap));
   }
 
   Future<void> deleteAlarmClock(String alarmId) async {
-    final String? alarmClocksJson = storage.getString("alarm_clocks");
+    final String? alarmClocksJson = storage.getString(ALARM_CLOCK_STORAGE_STRING);
 
     if (alarmClocksJson == null) {
       return;
@@ -53,6 +55,13 @@ class AlarmClockStorage {
         .where((element) => element.alarmId != alarmId)
         .toList();
 
-    await storage.setString("alarm_clocks", jsonEncode(listAlarmClocks));
+    await storage.setString(ALARM_CLOCK_STORAGE_STRING, jsonEncode(listAlarmClocks));
   }
+
+  Future<void> updateAlarmClocks(List<AlarmClockEntity> alarmClocks) async {
+    var listAlarmClocks = alarmClocks.map((alarmClock) => alarmClock.toJson()).toList();
+
+    await storage.clear();
+    await storage.setString(ALARM_CLOCK_STORAGE_STRING, jsonEncode(listAlarmClocks));
+  } 
 }

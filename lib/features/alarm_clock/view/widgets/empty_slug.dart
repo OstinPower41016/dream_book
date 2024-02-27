@@ -1,4 +1,4 @@
-import 'package:dream_book/features/alarm_clock_edit/view/alarm_clock_edit.dart';
+import 'package:dream_book/features/alarm_clock/view/widgets/alarm_clock_edit.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 

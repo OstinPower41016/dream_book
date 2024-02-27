@@ -27,6 +27,11 @@ class Home extends StatelessWidget {
           screens: _buildScreens(),
           navBarStyle: NavBarStyle.style9,
           items: _navBarsItems(context),
+          screenTransitionAnimation: const ScreenTransitionAnimation(
+            animateTabTransition: true,
+            curve: Curves.ease,
+            duration: Duration(milliseconds: 300),
+          ),
           decoration: NavBarDecoration(
               border: const Border(top: BorderSide(color: Colors.lightBlue)),
               colorBehindNavBar: Theme.of(context).primaryColor,
@@ -77,5 +82,13 @@ class Home extends StatelessWidget {
         activeColorSecondary: Colors.white,
       ),
     ];
+  }
+}
+
+class CustomFadeCurve extends Curve {
+  @override
+  double transform(double t) {
+    // Use easeInOut curve for smooth fade in and out effect
+    return Curves.easeInOut.transform(t);
   }
 }

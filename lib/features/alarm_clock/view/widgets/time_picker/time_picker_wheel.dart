@@ -1,4 +1,4 @@
-import 'package:dream_book/features/alarm_clock_edit/view/widgets/time_picker/time_picker_vm.dart';
+import 'package:dream_book/features/alarm_clock/view/widgets/time_picker/time_picker_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
