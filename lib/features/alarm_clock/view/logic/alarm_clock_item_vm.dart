@@ -8,6 +8,5 @@ class AlarmClockItemVM extends GetxController {
 
   void changeIsEnabled(bool value) {
     isEnabled.value = value;
-
   }
 }

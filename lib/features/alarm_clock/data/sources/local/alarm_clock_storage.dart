@@ -12,7 +12,8 @@ class AlarmClockStorage {
   final SharedPreferences storage = serviceLocator<SharedPreferences>();
 
   Future<List<AlarmClockEntity>> getListAlarmClocks() async {
-    final String? alarmClocksJson = storage.getString(ALARM_CLOCK_STORAGE_STRING);
+    final String? alarmClocksJson =
+        storage.getString(ALARM_CLOCK_STORAGE_STRING);
 
     if (alarmClocksJson == null) {
       return [];
@@ -26,7 +27,8 @@ class AlarmClockStorage {
   }
 
   Future<void> saveAlarmClock(AlarmClockEntity alarmClock) async {
-    final String? alarmClocksJson = storage.getString(ALARM_CLOCK_STORAGE_STRING);
+    final String? alarmClocksJson =
+        storage.getString(ALARM_CLOCK_STORAGE_STRING);
 
     List<Map<String, dynamic>> alarmClocksMap = [];
 
@@ -39,11 +41,13 @@ class AlarmClockStorage {
 
     alarmClocksMap.add(alarmClock.toJson());
 
-    await storage.setString(ALARM_CLOCK_STORAGE_STRING, jsonEncode(alarmClocksMap));
+    await storage.setString(
+        ALARM_CLOCK_STORAGE_STRING, jsonEncode(alarmClocksMap));
   }
 
   Future<void> deleteAlarmClock(String alarmId) async {
-    final String? alarmClocksJson = storage.getString(ALARM_CLOCK_STORAGE_STRING);
+    final String? alarmClocksJson =
+        storage.getString(ALARM_CLOCK_STORAGE_STRING);
 
     if (alarmClocksJson == null) {
       return;
@@ -55,13 +59,16 @@ class AlarmClockStorage {
         .where((element) => element.alarmId != alarmId)
         .toList();
 
-    await storage.setString(ALARM_CLOCK_STORAGE_STRING, jsonEncode(listAlarmClocks));
+    await storage.setString(
+        ALARM_CLOCK_STORAGE_STRING, jsonEncode(listAlarmClocks));
   }
 
   Future<void> updateAlarmClocks(List<AlarmClockEntity> alarmClocks) async {
-    var listAlarmClocks = alarmClocks.map((alarmClock) => alarmClock.toJson()).toList();
+    var listAlarmClocks =
+        alarmClocks.map((alarmClock) => alarmClock.toJson()).toList();
 
     await storage.clear();
-    await storage.setString(ALARM_CLOCK_STORAGE_STRING, jsonEncode(listAlarmClocks));
-  } 
+    await storage.setString(
+        ALARM_CLOCK_STORAGE_STRING, jsonEncode(listAlarmClocks));
+  }
 }

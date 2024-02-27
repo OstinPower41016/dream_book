@@ -8,7 +8,7 @@ class TimeCardVM extends GetxController {
   final AlarmClockEntity alarmClock;
   final RxBool isEnabled;
 
- TimeCardVM({required this.alarmClock}) : isEnabled = alarmClock.isEnabled.obs;
+  TimeCardVM({required this.alarmClock}) : isEnabled = alarmClock.isEnabled.obs;
 
   void changeIsEnabledTime(bool value) async {
     isEnabled.value = value;

@@ -4,7 +4,6 @@ import 'package:dream_book/features/alarm_clock/domain/entities/alarm_clock_enti
 class AlarmClockRepository {
   final AlarmClockStorage _alarmClockStorage = AlarmClockStorage();
 
-
   Future<void> setNewAlarmClock(AlarmClockEntity alarmClock) async {
     await _alarmClockStorage.saveAlarmClock(alarmClock);
   }
@@ -18,7 +17,14 @@ class AlarmClockRepository {
     await _alarmClockStorage.deleteAlarmClock(alarmId);
   }
 
-  Future<void> updateAlarmClocks(List<AlarmClockEntity> alarmClocks) async {
-    await _alarmClockStorage.updateAlarmClocks(alarmClocks);
+  Future<void> updateAlarmClock(AlarmClockEntity alarmClock) async {
+    final alarmClocks = await getListAlarmClocks();
+    final updatedAlarmClocksIdx = alarmClocks
+        .indexWhere((element) => element.alarmId == alarmClock.alarmId);
+
+    if (updatedAlarmClocksIdx != -1) {
+      alarmClocks[updatedAlarmClocksIdx] = alarmClock;
+      await _alarmClockStorage.updateAlarmClocks(alarmClocks);
+    }
   }
 }

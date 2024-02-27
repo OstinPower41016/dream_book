@@ -16,11 +16,12 @@ class AlarmClockEntity {
 
   Map<String, dynamic> toJson() => _$AlarmClockEntityToJson(this);
 
-  AlarmClockEntity copyWith({String? alarmId, DateTime? time, bool? isEnabled}) {
-  return AlarmClockEntity(
-    alarmId: alarmId ?? this.alarmId,
-    time: time ?? this.time,
-    isEnabled: isEnabled ?? this.isEnabled,
-  );
-}
+  AlarmClockEntity copyWith(
+      {String? alarmId, DateTime? time, bool? isEnabled}) {
+    return AlarmClockEntity(
+      alarmId: alarmId ?? this.alarmId,
+      time: time ?? this.time,
+      isEnabled: isEnabled ?? this.isEnabled,
+    );
+  }
 }

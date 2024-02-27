@@ -17,16 +17,14 @@ class TimeCard extends StatelessWidget {
   final vm = Get.put(AlarmClockVM());
   final TimeCardVM vmTimeCard;
 
- TimeCard({Key? key, required this.alarmClockItem})
+  TimeCard({Key? key, required this.alarmClockItem})
       : vmTimeCard = TimeCardVM(alarmClock: alarmClockItem),
         super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
     String hour = alarmClockItem.time.hour.toString().padLeft(2, "0");
     String minute = alarmClockItem.time.minute.toString().padLeft(2, "0");
-
 
     return Container(
       height: 100,
@@ -78,9 +76,8 @@ class TimeCard extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
               child: Obx(() => VerticalDivider(
                   width: 1,
-                  color: vmTimeCard.isEnabled.value
-                      ? Colors.green
-                      : Colors.red)),
+                  color:
+                      vmTimeCard.isEnabled.value ? Colors.green : Colors.red)),
             ),
             Column(
               children: [
