@@ -10,11 +10,11 @@ import 'package:get/get.dart';
 
 class TimeCard extends StatelessWidget {
   final AlarmClockEntity alarmClockItem;
-  final vm = Get.put(AlarmClockListVM());
-  final AlarmClockItemVM vmTimeCard;
+  final vmAlarmList = Get.put(AlarmClockListVM());
+  final AlarmClockItemVM vmAlarmItem;
 
   TimeCard({Key? key, required this.alarmClockItem})
-      : vmTimeCard = AlarmClockItemVM(alarmClock: alarmClockItem.obs),
+      : vmAlarmItem = AlarmClockItemVM(alarmClock: alarmClockItem.obs),
         super(key: key);
 
   @override
@@ -23,7 +23,7 @@ class TimeCard extends StatelessWidget {
     String minute = alarmClockItem.time.minute.toString().padLeft(2, "0");
 
     void deleteTimeCard() {
-      vm.deleteAlarmClock(alarmClockItem.alarmId);
+      vmAlarmList.deleteAlarmClock(alarmClockItem.alarmId);
     }
 
     return Container(
@@ -58,15 +58,19 @@ class TimeCard extends StatelessWidget {
                           minute: minute),
                     ],
                   ),
-                  const SizedBox(height: 10,),
-                  TimeCardBottomRow(),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  TimeCardBottomRow(
+                    vmAlarmItem: vmAlarmItem,
+                  ),
                 ],
               )),
           Positioned(
             top: 8,
             bottom: 8,
             right: 22,
-            child: TurningOnDivider(vmTimeCard: vmTimeCard),
+            child: TurningOnDivider(vmAlarmItem: vmAlarmItem),
           ),
           Positioned(
             top: 5,
@@ -74,7 +78,7 @@ class TimeCard extends StatelessWidget {
             right: 0,
             child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: TimeCardTurningOn(vmTimeCard: vmTimeCard)),
+                child: TimeCardTurningOn(vmAlarmItem: vmAlarmItem)),
           )
         ],
       ),

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class TimeCardTurningOn extends StatelessWidget {
-  final AlarmClockItemVM vmTimeCard;
+  final AlarmClockItemVM vmAlarmItem;
 
-  TimeCardTurningOn({required this.vmTimeCard});
+  TimeCardTurningOn({required this.vmAlarmItem});
 
   @override
   Widget build(BuildContext context) {
@@ -13,25 +13,28 @@ class TimeCardTurningOn extends StatelessWidget {
       children: [
         Expanded(
           child: InkWell(
-              onTap: () => vmTimeCard.changeIsEnabledTime(true),
+              onTap: () => vmAlarmItem.changeIsEnabledTime(true),
               child: Obx(
                 () => Center(
                     child: Icon(
                   Icons.check,
                   size: 16.0,
-                  color:
-                      vmTimeCard.alarmClock.value.isEnabled ? Colors.green : Colors.white,
+                  color: vmAlarmItem.alarmClock.value.isEnabled
+                      ? Colors.green
+                      : Colors.white,
                 )),
               )),
         ),
         Expanded(
             child: InkWell(
-          onTap: () => vmTimeCard.changeIsEnabledTime(false),
+          onTap: () => vmAlarmItem.changeIsEnabledTime(false),
           child: Obx(() => Center(
                 child: Icon(
                   Icons.close,
                   size: 16.0,
-                  color: vmTimeCard.alarmClock.value.isEnabled ? Colors.white : Colors.red,
+                  color: vmAlarmItem.alarmClock.value.isEnabled
+                      ? Colors.white
+                      : Colors.red,
                 ),
               )),
         ))

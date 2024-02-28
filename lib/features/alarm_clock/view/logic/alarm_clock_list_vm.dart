@@ -40,14 +40,13 @@ class AlarmClockListVM extends GetxController {
 
     await loadAlarmClockList();
 
-    await _setAlarmClockTime(scheduledDateTime);    
+    await _setAlarmClockTime(scheduledDateTime);
   }
 
   Future<List<AlarmClockEntity>> getListAlarmClocks() async {
     final alarmClocks = await alarmClockRepository.getListAlarmClocks();
     return alarmClocks;
   }
-
 
   Future<void> loadAlarmClockList() async {
     var list = await alarmClockRepository.getListAlarmClocks();
@@ -60,7 +59,7 @@ class AlarmClockListVM extends GetxController {
     await alarmClockRepository.deleteAlarmClock(alarmId);
     await loadAlarmClockList();
   }
-  
+
   Future<void> _setAlarmClockTime(DateTime time) async {
     await serviceLocator<NotificationService>().scheduleNotification(
       id: getUniqueId(),
