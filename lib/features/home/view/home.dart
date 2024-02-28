@@ -33,7 +33,7 @@ class Home extends StatelessWidget {
             duration: Duration(milliseconds: 300),
           ),
           decoration: NavBarDecoration(
-              border: const Border(top: BorderSide(color: Colors.lightBlue)),
+              border: const Border(top: BorderSide(color: Colors.blue)),
               colorBehindNavBar: Theme.of(context).primaryColor,
               boxShadow: [
                 const BoxShadow(
@@ -55,29 +55,29 @@ class Home extends StatelessWidget {
   List<PersistentBottomNavBarItem> _navBarsItems(context) {
     return [
       PersistentBottomNavBarItem(
-        icon: const Icon(Icons.nightlight, color: Colors.lightBlue),
+        icon: const Icon(Icons.nightlight, color: Colors.blue),
         title: ("Сны"),
         activeColorSecondary: Colors.white,
       ),
       PersistentBottomNavBarItem(
-          icon: const Icon(Icons.create, color: Colors.lightBlue),
+          icon: const Icon(Icons.create, color: Colors.blue),
           title: ("Дневник"),
           activeColorSecondary: Colors.white,
           routeAndNavigatorSettings: const RouteAndNavigatorSettings(
             initialRoute: RoutesPath.DIARY,
           )),
       PersistentBottomNavBarItem(
-        icon: const Icon(Icons.notifications_active, color: Colors.lightBlue),
+        icon: const Icon(Icons.notifications_active, color: Colors.blue),
         activeColorSecondary: Colors.white,
         title: ("Будильник"),
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(Icons.headphones, color: Colors.lightBlue),
+        icon: const Icon(Icons.headphones, color: Colors.blue),
         title: ("Музыка"),
         activeColorSecondary: Colors.white,
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(Icons.person, color: Colors.lightBlue),
+        icon: const Icon(Icons.person, color: Colors.blue),
         title: ("Профиль"),
         activeColorSecondary: Colors.white,
       ),
