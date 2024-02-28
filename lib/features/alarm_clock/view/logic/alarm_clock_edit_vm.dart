@@ -3,6 +3,7 @@ import 'package:dream_book/core/services/notification_service.dart';
 import 'package:dream_book/core/utils/getUniqueId.dart';
 import 'package:dream_book/features/alarm_clock/data/repositories/alarm_clock_repository.dart';
 import 'package:dream_book/features/alarm_clock/domain/entities/alarm_clock_entity.dart';
+import 'package:dream_book/features/alarm_clock/domain/entities/alarm_clock_repeat_by_entity.dart';
 import 'package:dream_book/features/alarm_clock/view/logic/alarm_clock_vm.dart';
 import 'package:dream_book/features/alarm_clock/view/logic/time_picker_vm.dart';
 import 'package:get/get.dart';
@@ -29,7 +30,8 @@ class AlarmClockEditVM extends GetxController {
     await alarmClockRepository.setNewAlarmClock(AlarmClockEntity(
         alarmId: getUniqueId().toString(),
         time: scheduledDateTime,
-        isEnabled: true));
+        isEnabled: true,
+        listForRepeat: AlarmClockRepeatByEntity()));
 
     await alarmClockListViewModel.loadAlarmClockList();
 

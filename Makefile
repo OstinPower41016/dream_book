@@ -1,5 +1,6 @@
 format:
 	dart format .
 
-build:
+
+build_project:
 	dart run build_runner build

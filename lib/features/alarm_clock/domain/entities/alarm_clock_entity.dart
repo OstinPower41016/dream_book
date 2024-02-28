@@ -1,3 +1,4 @@
+import 'package:dream_book/features/alarm_clock/domain/entities/alarm_clock_repeat_by_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'alarm_clock_entity.g.dart';
@@ -7,9 +8,13 @@ class AlarmClockEntity {
   final String alarmId;
   final DateTime time;
   final bool isEnabled;
+  final AlarmClockRepeatByEntity listForRepeat;
 
   AlarmClockEntity(
-      {required this.alarmId, required this.time, required this.isEnabled});
+      {required this.alarmId,
+      required this.time,
+      required this.isEnabled,
+      required this.listForRepeat});
 
   factory AlarmClockEntity.fromJson(Map<String, dynamic> json) =>
       _$AlarmClockEntityFromJson(json);
@@ -17,11 +22,14 @@ class AlarmClockEntity {
   Map<String, dynamic> toJson() => _$AlarmClockEntityToJson(this);
 
   AlarmClockEntity copyWith(
-      {String? alarmId, DateTime? time, bool? isEnabled}) {
+      {String? alarmId,
+      DateTime? time,
+      bool? isEnabled,
+      AlarmClockRepeatByEntity? listForRepeat}) {
     return AlarmClockEntity(
-      alarmId: alarmId ?? this.alarmId,
-      time: time ?? this.time,
-      isEnabled: isEnabled ?? this.isEnabled,
-    );
+        alarmId: alarmId ?? this.alarmId,
+        time: time ?? this.time,
+        isEnabled: isEnabled ?? this.isEnabled,
+        listForRepeat: listForRepeat ?? this.listForRepeat);
   }
 }

@@ -14,7 +14,7 @@ class EmptySlug extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text("Установленных будильников еще нет"),
-          const SizedBox(height: 16), 
+          const SizedBox(height: 16),
           TextButton(
             onPressed: () {
               alarmClockTabVM.changeActiveTab(TabOptions.edit_alarm_clock);

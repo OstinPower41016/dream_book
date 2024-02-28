@@ -11,6 +11,8 @@ AlarmClockEntity _$AlarmClockEntityFromJson(Map<String, dynamic> json) =>
       alarmId: json['alarmId'] as String,
       time: DateTime.parse(json['time'] as String),
       isEnabled: json['isEnabled'] as bool,
+      listForRepeat: AlarmClockRepeatByEntity.fromJson(
+          json['listForRepeat'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AlarmClockEntityToJson(AlarmClockEntity instance) =>
@@ -18,4 +20,5 @@ Map<String, dynamic> _$AlarmClockEntityToJson(AlarmClockEntity instance) =>
       'alarmId': instance.alarmId,
       'time': instance.time.toIso8601String(),
       'isEnabled': instance.isEnabled,
+      'listForRepeat': instance.listForRepeat,
     };
