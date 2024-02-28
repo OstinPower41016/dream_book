@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 
 class TimeCard extends StatelessWidget {
   final AlarmClockEntity alarmClockItem;
-  final vmAlarmList = Get.put(AlarmClockListVM());
+  final vmAlarmList = Get.find<AlarmClockListVM>();
   final AlarmClockItemVM vmAlarmItem;
 
   TimeCard({Key? key, required this.alarmClockItem})

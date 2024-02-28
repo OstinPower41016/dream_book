@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AlarmClockEdit extends StatelessWidget {
-  final vm = Get.put(AlarmClockListVM());
+  final vm = Get.find<AlarmClockListVM>();
   final tabVM = Get.put(AlarmClockTabVM());
 
   @override
