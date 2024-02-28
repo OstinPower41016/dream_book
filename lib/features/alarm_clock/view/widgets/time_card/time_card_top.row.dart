@@ -1,6 +1,4 @@
-import 'package:dream_book/features/alarm_clock/view/logic/alarm_clock_vm.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class TimeCardTopRow extends StatelessWidget {
   final void Function() deleteAlarmClock;
@@ -30,7 +28,7 @@ class TimeCardTopRow extends StatelessWidget {
                     icon: const Icon(
                       Icons.delete,
                       color: Colors.red,
-                      size: 20,
+                      size: 18,
                     ))
               ],
             )

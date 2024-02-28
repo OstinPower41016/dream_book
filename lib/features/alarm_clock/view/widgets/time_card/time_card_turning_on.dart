@@ -1,9 +1,9 @@
-import 'package:dream_book/features/alarm_clock/view/logic/time_card_vm.dart';
+import 'package:dream_book/features/alarm_clock/view/logic/alarm_clock_item_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class TimeCardTurningOn extends StatelessWidget {
-  final TimeCardVM vmTimeCard;
+  final AlarmClockItemVM vmTimeCard;
 
   TimeCardTurningOn({required this.vmTimeCard});
 
@@ -20,7 +20,7 @@ class TimeCardTurningOn extends StatelessWidget {
                   Icons.check,
                   size: 16.0,
                   color:
-                      vmTimeCard.isEnabled.value ? Colors.green : Colors.white,
+                      vmTimeCard.alarmClock.value.isEnabled ? Colors.green : Colors.white,
                 )),
               )),
         ),
@@ -31,7 +31,7 @@ class TimeCardTurningOn extends StatelessWidget {
                 child: Icon(
                   Icons.close,
                   size: 16.0,
-                  color: vmTimeCard.isEnabled.value ? Colors.white : Colors.red,
+                  color: vmTimeCard.alarmClock.value.isEnabled ? Colors.white : Colors.red,
                 ),
               )),
         ))

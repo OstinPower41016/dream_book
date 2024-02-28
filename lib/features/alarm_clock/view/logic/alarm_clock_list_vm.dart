@@ -4,13 +4,18 @@ import 'package:dream_book/core/utils/getUniqueId.dart';
 import 'package:dream_book/features/alarm_clock/data/repositories/alarm_clock_repository.dart';
 import 'package:dream_book/features/alarm_clock/domain/entities/alarm_clock_entity.dart';
 import 'package:dream_book/features/alarm_clock/domain/entities/alarm_clock_repeat_by_entity.dart';
-import 'package:dream_book/features/alarm_clock/view/logic/alarm_clock_vm.dart';
 import 'package:dream_book/features/alarm_clock/view/logic/time_picker_vm.dart';
 import 'package:get/get.dart';
 
-class AlarmClockEditVM extends GetxController {
+class AlarmClockListVM extends GetxController {
+  late RxList<AlarmClockEntity> alarmClockList = <AlarmClockEntity>[].obs;
   final AlarmClockRepository alarmClockRepository = AlarmClockRepository();
-  final AlarmClockVM alarmClockListViewModel = Get.find<AlarmClockVM>();
+
+  @override
+  void onInit() async {
+    await loadAlarmClockList();
+    super.onInit();
+  }
 
   Future<void> registerAlarmClock() async {
     int selectedHours =
@@ -33,12 +38,9 @@ class AlarmClockEditVM extends GetxController {
         isEnabled: true,
         listForRepeat: AlarmClockRepeatByEntity()));
 
-    await alarmClockListViewModel.loadAlarmClockList();
+    await loadAlarmClockList();
 
-    serviceLocator<NotificationService>().scheduleNotification(
-      id: getUniqueId(),
-      scheduledNotificationDateTime: scheduledDateTime,
-    );
+    await _setAlarmClockTime(scheduledDateTime);    
   }
 
   Future<List<AlarmClockEntity>> getListAlarmClocks() async {
@@ -46,7 +48,23 @@ class AlarmClockEditVM extends GetxController {
     return alarmClocks;
   }
 
-  Future<void> updateAlarmClock(AlarmClockEntity alarmClock) async {
-    await alarmClockRepository.updateAlarmClock(alarmClock);
+
+  Future<void> loadAlarmClockList() async {
+    var list = await alarmClockRepository.getListAlarmClocks();
+
+    alarmClockList.clear();
+    alarmClockList.addAll(list);
+  }
+
+  Future<void> deleteAlarmClock(String alarmId) async {
+    await alarmClockRepository.deleteAlarmClock(alarmId);
+    await loadAlarmClockList();
+  }
+  
+  Future<void> _setAlarmClockTime(DateTime time) async {
+    await serviceLocator<NotificationService>().scheduleNotification(
+      id: getUniqueId(),
+      scheduledNotificationDateTime: time,
+    );
   }
 }

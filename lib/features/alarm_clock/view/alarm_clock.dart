@@ -1,5 +1,4 @@
 import 'package:dream_book/features/alarm_clock/view/logic/alarm_clock_tab_vm.dart';
-import 'package:dream_book/features/alarm_clock/view/logic/alarm_clock_vm.dart';
 import 'package:dream_book/features/alarm_clock/view/widgets/alarm_clock_list.dart';
 import 'package:dream_book/features/alarm_clock/view/widgets/alarm_clock_edit.dart';
 import 'package:dream_book/features/alarm_clock/view/widgets/alarm_clock_tabs.dart';
@@ -7,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AlarmClock extends StatelessWidget {
-  final vm = Get.put(AlarmClockVM());
   final tabVM = Get.put(AlarmClockTabVM());
 
   @override

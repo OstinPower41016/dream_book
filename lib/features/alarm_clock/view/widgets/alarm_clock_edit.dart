@@ -1,4 +1,4 @@
-import 'package:dream_book/features/alarm_clock/view/logic/alarm_clock_edit_vm.dart';
+import 'package:dream_book/features/alarm_clock/view/logic/alarm_clock_list_vm.dart';
 import 'package:dream_book/features/alarm_clock/view/logic/alarm_clock_tab_vm.dart';
 import 'package:dream_book/features/alarm_clock/view/widgets/custom_switch/custom_switch.dart';
 import 'package:dream_book/features/alarm_clock/view/widgets/time_picker/time_picker.dart';
@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AlarmClockEdit extends StatelessWidget {
-  final vm = Get.put(AlarmClockEditVM());
+  final vm = Get.put(AlarmClockListVM());
   final tabVM = Get.put(AlarmClockTabVM());
 
   @override

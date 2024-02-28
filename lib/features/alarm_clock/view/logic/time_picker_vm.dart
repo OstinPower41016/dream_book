@@ -7,6 +7,5 @@ class TimePickerVM extends GetxController {
 
   void changeSelectedTime(int hour) {
     selectedTime.value = hour;
-    update();
   }
 }

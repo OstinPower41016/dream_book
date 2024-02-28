@@ -1,6 +1,7 @@
 import 'package:dream_book/features/alarm_clock/domain/entities/alarm_clock_entity.dart';
-import 'package:dream_book/features/alarm_clock/view/logic/alarm_clock_vm.dart';
-import 'package:dream_book/features/alarm_clock/view/logic/time_card_vm.dart';
+import 'package:dream_book/features/alarm_clock/view/logic/alarm_clock_item_vm.dart';
+import 'package:dream_book/features/alarm_clock/view/logic/alarm_clock_list_vm.dart';
+import 'package:dream_book/features/alarm_clock/view/widgets/time_card/time_card_bottom_row.dart';
 import 'package:dream_book/features/alarm_clock/view/widgets/time_card/time_card_top.row.dart';
 import 'package:dream_book/features/alarm_clock/view/widgets/time_card/time_card_turning_on.dart';
 import 'package:dream_book/features/alarm_clock/view/widgets/time_card/turning_on_divider.dart';
@@ -9,11 +10,11 @@ import 'package:get/get.dart';
 
 class TimeCard extends StatelessWidget {
   final AlarmClockEntity alarmClockItem;
-  final vm = Get.put(AlarmClockVM());
-  final TimeCardVM vmTimeCard;
+  final vm = Get.put(AlarmClockListVM());
+  final AlarmClockItemVM vmTimeCard;
 
   TimeCard({Key? key, required this.alarmClockItem})
-      : vmTimeCard = TimeCardVM(alarmClock: alarmClockItem),
+      : vmTimeCard = AlarmClockItemVM(alarmClock: alarmClockItem.obs),
         super(key: key);
 
   @override
@@ -26,13 +27,13 @@ class TimeCard extends StatelessWidget {
     }
 
     return Container(
-      height: 100,
+      height: 125,
       margin: const EdgeInsets.only(
         bottom: 30,
       ),
       decoration: BoxDecoration(
           color: Theme.of(context).primaryColor,
-          border: Border.all(color: Colors.black26 ?? Colors.blue),
+          border: Border.all(color: Colors.black26),
           borderRadius: BorderRadius.circular(15.0),
           boxShadow: const [
             BoxShadow(
@@ -42,16 +43,40 @@ class TimeCard extends StatelessWidget {
               offset: Offset(1, 5),
             ),
           ]),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          children: [
-            TimeCardTopRow(
-                deleteAlarmClock: deleteTimeCard, hour: hour, minute: minute),
-            TurningOnDivider(vmTimeCard: vmTimeCard),
-            TimeCardTurningOn(vmTimeCard: vmTimeCard)
-          ],
-        ),
+      child: Stack(
+        children: [
+          Padding(
+              padding: const EdgeInsets.only(
+                  top: 16.0, bottom: 8.0, left: 16.0, right: 32.0),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      TimeCardTopRow(
+                          deleteAlarmClock: deleteTimeCard,
+                          hour: hour,
+                          minute: minute),
+                    ],
+                  ),
+                  const SizedBox(height: 10,),
+                  TimeCardBottomRow(),
+                ],
+              )),
+          Positioned(
+            top: 8,
+            bottom: 8,
+            right: 22,
+            child: TurningOnDivider(vmTimeCard: vmTimeCard),
+          ),
+          Positioned(
+            top: 5,
+            bottom: 1,
+            right: 0,
+            child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TimeCardTurningOn(vmTimeCard: vmTimeCard)),
+          )
+        ],
       ),
     );
   }
