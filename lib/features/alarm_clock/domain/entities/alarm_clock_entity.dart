@@ -5,7 +5,7 @@ part 'alarm_clock_entity.g.dart';
 
 @JsonSerializable()
 class AlarmClockEntity {
-  final String alarmId;
+  final int alarmId;
   final DateTime time;
   final bool isEnabled;
   final AlarmClockRepeatByEntity listForRepeat;
@@ -22,7 +22,7 @@ class AlarmClockEntity {
   Map<String, dynamic> toJson() => _$AlarmClockEntityToJson(this);
 
   AlarmClockEntity copyWith(
-      {String? alarmId,
+      {int? alarmId,
       DateTime? time,
       bool? isEnabled,
       AlarmClockRepeatByEntity? listForRepeat}) {

@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 class AlarmClockListVM extends GetxController {
   late RxList<AlarmClockEntity> alarmClockList = <AlarmClockEntity>[].obs;
   final AlarmClockRepository alarmClockRepository = AlarmClockRepository();
+  final notificationService = serviceLocator<NotificationService>();
 
   @override
   void onInit() async {
@@ -23,6 +24,7 @@ class AlarmClockListVM extends GetxController {
     int selectedMinutes =
         Get.find<TimePickerVM>(tag: "timePickerMinutes").selectedTime.value %
             60;
+    int alarmClockId = getUniqueId();
 
     DateTime now = DateTime.now();
     DateTime scheduledDateTime =
@@ -33,14 +35,14 @@ class AlarmClockListVM extends GetxController {
     }
 
     await alarmClockRepository.setNewAlarmClock(AlarmClockEntity(
-        alarmId: getUniqueId().toString(),
+        alarmId: alarmClockId,
         time: scheduledDateTime,
         isEnabled: true,
         listForRepeat: AlarmClockRepeatByEntity()));
 
-    await loadAlarmClockList();
+    await _setAlarmClockTimeNotification(alarmClockId, scheduledDateTime);
 
-    await _setAlarmClockTime(scheduledDateTime);
+    await loadAlarmClockList();
   }
 
   Future<List<AlarmClockEntity>> getListAlarmClocks() async {
@@ -55,15 +57,20 @@ class AlarmClockListVM extends GetxController {
     alarmClockList.addAll(list);
   }
 
-  Future<void> deleteAlarmClock(String alarmId) async {
+  Future<void> deleteAlarmClock(int alarmId) async {
     await alarmClockRepository.deleteAlarmClock(alarmId);
+    await _deleteAlarmClockNotification(alarmId);
     await loadAlarmClockList();
   }
 
-  Future<void> _setAlarmClockTime(DateTime time) async {
-    await serviceLocator<NotificationService>().scheduleNotification(
-      id: getUniqueId(),
+  Future<void> _setAlarmClockTimeNotification(int id, DateTime time) async {
+    await notificationService.scheduleNotification(
+      id: id,
       scheduledNotificationDateTime: time,
     );
+  }
+
+  Future<void> _deleteAlarmClockNotification(int id) async {
+    await notificationService.deleteNotification(id);
   }
 }

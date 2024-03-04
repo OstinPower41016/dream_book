@@ -45,7 +45,7 @@ class AlarmClockStorage {
         ALARM_CLOCK_STORAGE_STRING, jsonEncode(alarmClocksMap));
   }
 
-  Future<void> deleteAlarmClock(String alarmId) async {
+  Future<void> deleteAlarmClock(int alarmId) async {
     final String? alarmClocksJson =
         storage.getString(ALARM_CLOCK_STORAGE_STRING);
 

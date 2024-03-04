@@ -36,10 +36,10 @@ class AlarmClockEdit extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 48),
           child: ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 // Navigator.of(context).pop();
+                await vm.registerAlarmClock();
                 tabVM.changeActiveTab(TabOptions.list_alarm_clock);
-                vm.registerAlarmClock();
               },
               child: const Text("Установить будильник")),
         )

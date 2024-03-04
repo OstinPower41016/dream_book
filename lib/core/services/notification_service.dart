@@ -8,10 +8,20 @@ class NotificationService {
   Future<void> setup() async {
     const androidInitializationSetting =
         AndroidInitializationSettings('@mipmap/ic_launcher');
-    const iosInitializationSetting = DarwinInitializationSettings();
-    const initSettings = InitializationSettings(
+
+
+    void onDidReceiveLocalNotification(id, title, body, payload) {
+      print("$id $title $body $payload");
+    }
+
+    var iosInitializationSetting = DarwinInitializationSettings(onDidReceiveLocalNotification: onDidReceiveLocalNotification);
+
+
+    var initSettings = InitializationSettings(
         android: androidInitializationSetting, iOS: iosInitializationSetting);
-    await _flutterLocalNotificationsPlugin.initialize(initSettings);
+      
+
+    await _flutterLocalNotificationsPlugin.initialize(initSettings, onDidReceiveNotificationResponse: (details) => print("${details.id} on tap"));
   }
 
   void showLocalNotification(String title, String body) {
@@ -19,7 +29,9 @@ class NotificationService {
         '0', // channel Id
         'general' // channel Name
         );
-    const iosNotificatonDetail = DarwinNotificationDetails();
+    const iosNotificatonDetail = DarwinNotificationDetails(
+      presentAlert: true
+    );
     const notificationDetails = NotificationDetails(
       iOS: iosNotificatonDetail,
       android: androidNotificationDetail,
@@ -28,18 +40,28 @@ class NotificationService {
   }
 
   Future<void> scheduleNotification(
-      {int id = 0, required DateTime scheduledNotificationDateTime}) async {
+      {required int id,
+      required DateTime scheduledNotificationDateTime}) async {
     await _flutterLocalNotificationsPlugin.zonedSchedule(
         id,
         'Будильник',
         '',
-        tz.TZDateTime.from(scheduledNotificationDateTime, tz.local),
+        tz.TZDateTime.from(DateTime.now().add(Duration(seconds: 3)), tz.local),
         const NotificationDetails(
+            iOS: DarwinNotificationDetails(
+              presentAlert: true,
+            ),
             android: AndroidNotificationDetails(
                 'your channel id', 'your channel name',
+                autoCancel: false,
+                ongoing: true,
                 channelDescription: 'your channel description')),
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime);
+  }
+
+  Future<void> deleteNotification(int id) async {
+    await _flutterLocalNotificationsPlugin.cancel(id);
   }
 }

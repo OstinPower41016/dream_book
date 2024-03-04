@@ -13,7 +13,7 @@ class AlarmClockRepository {
     return alarmClocks;
   }
 
-  Future<void> deleteAlarmClock(String alarmId) async {
+  Future<void> deleteAlarmClock(int alarmId) async {
     await _alarmClockStorage.deleteAlarmClock(alarmId);
   }
 

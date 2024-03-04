@@ -8,7 +8,7 @@ part of 'alarm_clock_entity.dart';
 
 AlarmClockEntity _$AlarmClockEntityFromJson(Map<String, dynamic> json) =>
     AlarmClockEntity(
-      alarmId: json['alarmId'] as String,
+      alarmId: json['alarmId'] as int,
       time: DateTime.parse(json['time'] as String),
       isEnabled: json['isEnabled'] as bool,
       listForRepeat: AlarmClockRepeatByEntity.fromJson(
